@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go Wasm</title>
+    <link rel="icon" href="https://fav.farm/🚧" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="css/pico.classless.violet.min.css" />
+    <script src="wasm_exec.js"></script>
+    <script>
+      // Not to step on any intelectual property of a certain Crüe 🤘
+      function kickStartMyWasmHeart() {
+        const sqrtNumInput = document.getElementById('sqrt-num');
+        const sqrtForm = document.getElementById('sqrt-form');
+        const sqrtAnswerDiv = document.getElementById('sqrt-answer');
+
+        sqrtForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const value = sqrtNumInput.value;
+          if (!value) return;
+
+          const numValue = parseFloat(value);
+          if (isNaN(numValue)) {
+            sqrtAnswerDiv.innerHTML = `😕 "${value}" is not a number - no Gopher in the world would know what to do with that!`;
+            return;
+          }
+
+          const result = GoSqrt(numValue);
+          sqrtAnswerDiv.innerHTML = `🤓 The square root of ${numValue} is ${result}.<br>So sayeth the Gopher.`;
+        });
+      }
+
+      // Creates an instance of the Go wasm_exec class, streams in the Wasm module and runs it. 🚀
+      const go = new Go();
+      WebAssembly.instantiateStreaming(fetch('app.wasm'), go.importObject).then((result) => {
+        go.run(result.instance);
+        kickStartMyWasmHeart();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1 style="display: flex; align-items: center; gap: 0.6rem">
+        <span>Go with Wasm</span>
+        <img src="gopher.svg" alt="gopher" style="width: 1.8rem; display: inline" />
+      </h1>
+    </header>
+
+    <main>
+      <p>Let's have our Gopher do some math:</p>
+      <form id="sqrt-form">
+        <input type="text" name="sqrt-num" id="sqrt-num" placeholder="Enter some number" required />
+        <button type="submit">Calculate Square Root</button>
+      </form>
+      <div id="sqrt-answer"></div>
+    </main>
+  </body>
+</html>

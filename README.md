@@ -16,3 +16,22 @@ running in your browser and interacting with JavaScript.
 - The [WebAssembly Docs](https://webassembly.org/)
 - The growing [WebAssembly section of awesome-go](https://awesome-go.com/#webassembly) for neat libraries and tools in the ecosystem
 - [go-app.dev](https://go-app.dev/) - the up and coming package for building [PWA's (Progressive Web Apps)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) using Go and Wasm
+
+## Running locally
+
+Go version `>1.22` is the only local requirement.
+
+Start up a development server and build your Wasm module using:
+
+```bash
+make run
+```
+
+Any change you make to the Wasm module requires a rebuild of the `build-wasm` target.
+For a simple use-case such as this you may opt to periodically run a build:
+
+```bash
+watch make build-wasm
+```
+
+Builds from the first onward should only actually occur when changing the contents of `./cmds/wasm`.

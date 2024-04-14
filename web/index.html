@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="css/pico.classless.violet.min.css" />
     <script src="wasm_exec.js"></script>
     <script>
-      // Not to step on any intelectual property of a certain Crüe 🤘
-      function kickStartMyWasmHeart() {
+      function wireItAllUp() {
         const sqrtNumInput = document.getElementById('sqrt-num');
         const sqrtForm = document.getElementById('sqrt-form');
         const sqrtAnswerDiv = document.getElementById('sqrt-answer');
@@ -28,11 +27,11 @@
       const go = new Go();
       WebAssembly.instantiateStreaming(fetch('app.wasm'), go.importObject).then((result) => {
         go.run(result.instance);
-        kickStartMyWasmHeart();
+        wireItAllUp();
       });
     </script>
   </head>
-  <body style="max-width: 900px; margin: 0 auto;">
+  <body style="max-width: 900px; margin: 0 auto">
     <header>
       <h1 style="display: flex; align-items: center; gap: 0.6rem">
         <span>Using Go in the Browser</span>

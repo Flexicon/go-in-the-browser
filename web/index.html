@@ -17,18 +17,10 @@
 
         sqrtForm.addEventListener('submit', function (e) {
           e.preventDefault();
-
           const value = sqrtNumInput.value;
-          if (!value) return;
+          const result = GoSqrt(value);
 
-          const numValue = parseFloat(value);
-          if (isNaN(numValue)) {
-            sqrtAnswerDiv.innerHTML = `😕 "${value}" is not a number - no Gopher in the world would know what to do with that!`;
-            return;
-          }
-
-          const result = GoSqrt(numValue);
-          sqrtAnswerDiv.innerHTML = `🤓 The square root of ${numValue} is ${result}.<br>So sayeth the Gopher.`;
+          sqrtAnswerDiv.innerHTML = `🤓 The square root of ${value} is ${result}.<br>So sayeth the Gopher.`;
         });
       }
 
@@ -46,6 +38,10 @@
         <span>Use Go in the Browser</span>
         <img src="gopher.svg" alt="gopher" style="width: 1.8rem; display: inline" />
       </h1>
+      <p>
+        All actual calculations and operations are handled in Go, not JavaScript. See
+        <a href="https://github.com/Flexicon/go-in-the-browser" target="_blank" rel="noopener noreferrer">source</a>.
+      </p>
     </header>
 
     <main>

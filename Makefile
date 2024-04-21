@@ -12,7 +12,7 @@ run: build
 
 web/app.wasm: cmds/wasm/*.go
 	@ echo "🔨 Building Wasm modules..."
-	@ cp $(shell go env GOROOT)/misc/wasm/wasm_exec.js ./web
-	@ GOARCH=wasm GOOS=js go build -o web/app.wasm ./cmds/wasm
+	@ cp $(tinygo env GOROOT)/targets/wasm_exec.js ./web
+	@ tinygo build -o web/tiny.wasm -target wasm ./cmds/wasm/main.go
 	@ du -sh ./web/app.wasm
 	@ echo "✅ Done"
